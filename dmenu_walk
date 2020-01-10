@@ -1,0 +1,6 @@
+#!/bin/sh
+app_list=$(grep '^Name=\|^Exec=' /usr/share/applications/*.desktop | grep -v "$(grep '^NoDisplay=true$\|^Hidden=true$' /usr/share/applications/*.desktop | cut -d: -f1)")
+
+chosen=$(echo "$app_list" | grep ':Name=' | cut -d= -f2- | dmenu "$@") || exit 1
+
+$(echo "$app_list" | grep "$(echo "$app_list" | grep "=$chosen$" | cut -d: -f1)" | grep ':Exec=' | cut -d= -f2-) > /dev/null 2>&1&

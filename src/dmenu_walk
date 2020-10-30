@@ -3,4 +3,4 @@ app_list=$(grep '^Name=\|^Exec=' /usr/share/applications/*.desktop | grep -v "$(
 
 chosen=$(echo "$app_list" | grep ':Name=' | cut -d= -f2- | dmenu "$@") || exit 1
 
-$(echo "$app_list" | grep "$(echo "$app_list" | grep "=$chosen$" | cut -d: -f1)" | grep ':Exec=' | cut -d= -f2-) > /dev/null 2>&1&
+$(echo "$app_list" | grep "$(echo "$app_list" | grep "=$chosen$" | cut -d: -f1)" | grep ':Exec=' | cut -d= -f2- | sed "s/%[fFuUdDnNickvm]//g") > /dev/null 2>&1&

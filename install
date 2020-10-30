@@ -1,0 +1,1 @@
+sudo mv src/dmenu_walk /usr/local/bin
